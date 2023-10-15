@@ -1,5 +1,11 @@
 "use strict";
 
+const modalImg = document.querySelector(".modal-img > img");
+const modalTitle = document.querySelector(".modal-title");
+const modalDato1 = document.querySelector(".modal-dato1");
+const modalDato2 = document.querySelector(".modal-dato2");
+const modalDato3 = document.querySelector(".modal-dato3");
+
 const apiGhibli = fetch("https://ghibliapi.vercel.app/films")
   .then((response) => response.json())
   .then((data) => {
@@ -32,16 +38,12 @@ const apiGhibli = fetch("https://ghibliapi.vercel.app/films")
 
       const btnVerMas = document.querySelector(`#film${i}`);
       btnVerMas.addEventListener("click", () => {
-        const modalImg = document.querySelector(".modal-img > img");
         modalImg.src = film.image;
-        const modalTitle = document.querySelector(".modal-title");
         modalTitle.innerHTML = film.title;
-        const modalDato1 = document.querySelector(".modal-dato1");
         modalDato1.innerHTML = film.director;
-        const modalDato2 = document.querySelector(".modal-dato2");
         modalDato2.innerHTML = film.release_date;
-        const modalDato3 = document.querySelector(".modal-dato3");
         modalDato3.innerHTML = film.running_time;
+        localStorage.setItem(film.title, film.title);
       });
     });
     return data;
