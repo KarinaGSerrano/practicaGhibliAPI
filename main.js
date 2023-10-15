@@ -5,36 +5,16 @@ const modalTitle = document.querySelector(".modal-title");
 const modalDato1 = document.querySelector(".modal-dato1");
 const modalDato2 = document.querySelector(".modal-dato2");
 const modalDato3 = document.querySelector(".modal-dato3");
+const containerCards = document.querySelector(".container-cards");
 
 const apiGhibli = fetch("https://ghibliapi.vercel.app/films")
   .then((response) => response.json())
   .then((data) => {
     data.forEach((film, i) => {
-      const containerCards = document.querySelector(".container-cards");
-      const templateCard = `<div class="pt-4 col-lg-4 col-md-6 col-sm-12">
-                              <div class="card text-center">
-                                <img
-                                  src="${film.movie_banner}"
-                                  class="card-img-top"
-                                  alt="..."
-                                />
-                                <div class="card-body">
-                                  <h2 class="card-title">${film.title}</h2>
-                                  <p class="card-description">${film.description}</p>
-                                  <button
-                                    type="button"
-                                    class="btn btn-style"
-                                    id="film${i}"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop"
-                                  >
-                                    Ver más
-                                  </button>
-                                </div>
-                              </div>
-                            </div>`;
-
-      containerCards.insertAdjacentHTML("beforeend", templateCard);
+      containerCards.insertAdjacentHTML(
+        "beforeend",
+        templateCard(film.movie_banner, film.title, film.description, i)
+      );
 
       const btnVerMas = document.querySelector(`#film${i}`);
       btnVerMas.addEventListener("click", () => {
@@ -48,3 +28,28 @@ const apiGhibli = fetch("https://ghibliapi.vercel.app/films")
     });
     return data;
   });
+
+const templateCard = function (img, title, description, id) {
+  return `<div class="pt-4 col-lg-4 col-md-6 col-sm-12">
+          <div class="card text-center">
+            <img
+              src="${img}"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h2 class="card-title">${title}</h2>
+              <p class="card-description">${description}</p>
+              <button
+                type="button"
+                class="btn btn-style"
+                id="film${id}"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+              >
+                Ver más
+              </button>
+            </div>
+          </div>
+        </div>`;
+};

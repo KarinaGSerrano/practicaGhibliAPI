@@ -58,3 +58,14 @@ h1 {
   color: rgb(128, 125, 121);
   opacity: 100%;
 }
+
+.footer {
+  margin-top: 15rem;
+  padding: 2rem;
+  background: #ffa200c3;
+  color: rgba(47, 39, 10, 1);
+}
+
+.color-smile {
+  color: rgba(47, 39, 10, 0.655);
+}
